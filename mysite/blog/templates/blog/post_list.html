@@ -1,28 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title for the Post Lists</title>
-</head>
-    <body>
-        <div>
-            <h1><a href="/">Django Girls Blog</a></h1>
-        </div>
+{% extends 'blog/base.html' %}
 
-        <div>
-            {% for current_post in posts %}
-            <div>
-                <p>published: {{ current_post.published_date }}</p>
-                <h2><a href="">{{ current_post.workout_name }}</a></h2>
-                <p>{{ current_post.text|linebreaksbr }}</p>
-            </div>
-            {% endfor %}
-        </div>
-
-        <div>
-            <p>published: 14.06.2014, 12:14</p>
-            <h2><a href="">My second post</a></h2>
-            <p>Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut f.</p>
-        </div>
-    </body>
-</html>
+{% block content %}
+    {% for current_post in posts %}
+    <div class="post">
+        <h2><a href="{% url 'post_detail' pk=current_post.pk %}">{{ current_post.workout_name }}</a></h2>
+        <h4>{{ current_post.text|linebreaksbr }}</h4>
+        <p>published: {{ current_post.published_date }}</p>
+    </div>
+    {% endfor %}
+{% endblock %}
